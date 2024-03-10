@@ -23,6 +23,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Groups2Icon from "@mui/icons-material/Groups2";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
+import SettingsIcon from '@mui/icons-material/Settings';
 import React, { useState } from "react";
 import { pink, red } from "@mui/material/colors";
 import { ThemeProvider } from "@emotion/react";
@@ -186,13 +187,13 @@ export default function PageNav({ children }) {
             </DrawerHeader>
             <Divider />
             <List>
+              <Link href="/">
               <ListItem
                 key={"DashBoard"}
                 onClick={() => setOpenTab("DashBoard".toLowerCase())}
                 disablePadding
                 sx={{ display: "block" }}
               >
-                <Link href="/">
                   <ListItemButton
                     sx={{
                       minHeight: 48,
@@ -214,8 +215,8 @@ export default function PageNav({ children }) {
                       sx={{ opacity: open ? 1 : 0 }}
                     />
                   </ListItemButton>
-                </Link>
               </ListItem>
+                </Link>
 
               <ListItem
                 key={"Closed_Groups"}
@@ -248,12 +249,12 @@ export default function PageNav({ children }) {
                 </Link>
               </ListItem>
               <ListItem
-                key={"Users"}
-                onClick={() => setOpenTab("Users".toLowerCase())}
+                key={"Options"}
+                onClick={() => setOpenTab("Options".toLowerCase())}
                 disablePadding
                 sx={{ display: "block" }}
               >
-                <Link href="/users">
+                <Link href="/options">
                   <ListItemButton
                     sx={{
                       minHeight: 48,
@@ -268,10 +269,10 @@ export default function PageNav({ children }) {
                         justifyContent: "center",
                       }}
                     >
-                      <Groups2Icon />
+                      <SettingsIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary={"Users"}
+                      primary={"Options"}
                       sx={{ opacity: open ? 1 : 0 }}
                     />
                   </ListItemButton>

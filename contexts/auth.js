@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) =>{
                     console.log("Got a token in the cookies, let's see if it is valid");
                     api.defaults.headers.Authorization = `Bearer ${token}`
                     const {data: user} = await api.get('admin/me')
-                    console.log("check user",user);
+                    console.log("got user",user);
                     setUser(user)
                 }
                 catch(err){

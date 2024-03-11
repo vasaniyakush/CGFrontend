@@ -25,6 +25,7 @@ const materialTheme = createTheme({
     secondary: {
       main: "#fce4ec",
       dark: "#e57373",
+      contrastText: '#000000',
     },
     divider: "rgba(0,0,0,0.24)",
     background: {

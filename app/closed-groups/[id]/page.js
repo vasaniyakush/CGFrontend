@@ -36,36 +36,38 @@ export default function Dashboard({ params }) {
   const [invitesLoading, setInvitesLoading] = React.useState(true);
   const [usersLoading, setUsersLoading] = React.useState(true);
 
-  const [details,setDetails] = React.useState({})
-  const [users,setUsers] = React.useState({})
-  const [invites,setInvites] = React.useState({})
-  const [refresh,setRefresh] = React.useState(false)
-  const toggleRefresh = ()=> setRefresh(!refresh)
-  const [ownGroup,setOwnGroup] = React.useState(false)
+  const [details, setDetails] = React.useState({});
+  const [users, setUsers] = React.useState({});
+  const [invites, setInvites] = React.useState({});
+  const [refresh, setRefresh] = React.useState(false);
+  const toggleRefresh = () => setRefresh(!refresh);
+  const [ownGroup, setOwnGroup] = React.useState(false);
   const { login, loading, user } = useAuth();
-  
-  React.useEffect(()=>{
-    async function getClosedGroup(){
+
+  React.useEffect(() => {
+    async function getClosedGroup() {
       const token = Cookies.get("token");
       api.defaults.headers.Authorization = `Bearer ${token}`;
       try {
         const response = await api.get(`closed-group/${params.id}`);
         // console.log(response.data);
         setDetails(response.data.closedGroup);
-        setOwnGroup(response.data.closedGroup.createdBy == user.data.uid)
-        setDetailsLoading(false)
+        setOwnGroup(response.data.closedGroup.createdBy == user.data.uid);
+        setDetailsLoading(false);
         // console.log(response.data.closedGroup.createdBy,user.data.uid, user,response.data.closedGroup.createdBy == user.data.uid)
-        const response2 = await api.get(`closed-group/invite?closedgroupid=${params.id}`);
-        console.log("hello",response2.data);
+        const response2 = await api.get(
+          `closed-group/invite?closedgroupid=${params.id}`
+        );
+        console.log("hello", response2.data);
         setInvites(response2.data.invites);
-        setInvitesLoading(false)
+        setInvitesLoading(false);
       } catch (error) {
         console.error("Error fetching closed groups:", error);
       } finally {
       }
 
       // try {
-        
+
       //   // setOwnGroup(response.data.closedGroup.createdBy == user.data.uid)
       //   // console.log(response.data.closedGroup.createdBy,user.data.uid, user,response.data.closedGroup.createdBy == user.data.uid)
 
@@ -74,37 +76,27 @@ export default function Dashboard({ params }) {
       // } finally {
       //   setInvitesLoading(false)
       // }
-
-
-  
     }
-    setDetailsLoading(true)
-    setInvitesLoading(true)
-    setUsersLoading(true)
-    getClosedGroup()
-    
-    
-  },[refresh])
+    setDetailsLoading(true);
+    setInvitesLoading(true);
+    setUsersLoading(true);
+    getClosedGroup();
+  }, [refresh]);
 
   return (
-    // <ThemeProvider theme={defaultTheme}>
-    <Box sx={{ display: "flex", ml:0 }}>
-      {/* <CssBaseline /> */}
+    <Box sx={{ display: "flex", ml: 0 }}>
 
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           height: "100vh",
-          ml:0
-          // overflow: "auto",
+          ml: 0,
         }}
       >
-        {/* <Toolbar /> */}
-        <Container maxWidth="false" sx={{ mt: 1, mb: 1, ml:0 }}>
+        <Container maxWidth="false" sx={{ mt: 1, mb: 1, ml: 0 }}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={12} lg={12} >
+            <Grid item xs={12} md={12} lg={12}>
               {detailsLoading ? (
                 <Skeleton
                   animation="wave"
@@ -121,78 +113,82 @@ export default function Dashboard({ params }) {
                     height: 240,
                   }}
                 >
-                  {/* {params.id} */}
-                  {/* <Chart /> */}
-                  <GroupDetails details={details}/>
+                  <GroupDetails details={details} />
                 </Paper>
               )}
             </Grid>
-            {ownGroup && !details.started && details.active &&
-            
-            <Grid item xs={12} md={6} lg={6}>
-              {invitesLoading ? (
-                <Skeleton
-                  animation="wave"
-                  variant="rectangular"
-                  height={240}
-                  sx={{ mt: 0 }}
-                ></Skeleton>
-              ) : (
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  {/* <Deposits /> */}
-                  <InvitesList toggleRefresh={toggleRefresh} name={"request"} invites={invites}/>
-                </Paper>
-              )}
-            </Grid>
-            }
-            {ownGroup && !details.started && details.active  &&
-            
-            <Grid item xs={12} md={6} lg={6}>
-              {invitesLoading ? (
-                <Skeleton
-                  animation="wave"
-                  variant="rectangular"
-                  height={240}
-                  sx={{ mt: 0 }}
-                ></Skeleton>
-              ) : (
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  {/* <Deposits /> */}
-                  <InvitesList name={"invite"} invites={invites}/>
-                </Paper>
-              )}
-            </Grid>
-            }
-            {/* Recent Orders */}
-            <Grid item xs={12}>
+            {ownGroup && !details.started && details.active && (
+              <Grid item xs={12} md={6} lg={6}>
+                {invitesLoading ? (
+                  <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    height={240}
+                    sx={{ mt: 0 }}
+                  ></Skeleton>
+                ) : (
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 240,
+                    }}
+                  >
+                    <InvitesList
+                      toggleRefresh={toggleRefresh}
+                      name={"request"}
+                      invites={invites}
+                    />
+                  </Paper>
+                )}
+              </Grid>
+            )}
+            {ownGroup && !details.started && details.active && (
+              <Grid item xs={12} md={6} lg={6}>
+                {invitesLoading ? (
+                  <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    height={240}
+                    sx={{ mt: 0 }}
+                  ></Skeleton>
+                ) : (
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 240,
+                    }}
+                  >
               
+                    
+                    <InvitesList name={"invite"} invites={invites} />
+                  </Paper>
+                )}
+              </Grid>
+            )}
+     
+            <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                {/* <Orders /> */}
+            
+                <Typography
+                      component="h2"
+                      variant="h6"
+                      color="primary"
+                      gutterBottom
+                    >
+                      Members
+                    </Typography>
                 <MemberTable groupId={params.id} />
               </Paper>
-            
             </Grid>
             <Grid item xs={12}>
-              
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                {/* <Orders /> */}
+               
                 <CyclesTable />
               </Paper>
-            
             </Grid>
           </Grid>
           {/* <Copyright sx={{ pt: 4 }} /> */}

@@ -23,7 +23,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Groups2Icon from "@mui/icons-material/Groups2";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 import React, { useState } from "react";
 import { pink, red } from "@mui/material/colors";
 import { ThemeProvider } from "@emotion/react";
@@ -32,7 +32,7 @@ import { Avatar, Button } from "@mui/material";
 import LoginForm from "./LoginForm";
 import Image from "next/image";
 import Link from "next/link";
-// import logo from "@public/images" 
+// import logo from "@public/images"
 
 const drawerWidth = 240;
 
@@ -161,7 +161,6 @@ export default function PageNav({ children }) {
           <Typography variant="h6" noWrap component="div">
             Social Savings Club
           </Typography>
-
         </Toolbar>
       </AppBar>
       {isAuthenticated ? (
@@ -188,12 +187,12 @@ export default function PageNav({ children }) {
             <Divider />
             <List>
               <Link href="/">
-              <ListItem
-                key={"DashBoard"}
-                onClick={() => setOpenTab("DashBoard".toLowerCase())}
-                disablePadding
-                sx={{ display: "block" }}
-              >
+                <ListItem
+                  key={"Cycles"}
+                  onClick={() => setOpenTab("Cycles".toLowerCase())}
+                  disablePadding
+                  sx={{ display: "block" }}
+                >
                   <ListItemButton
                     sx={{
                       minHeight: 48,
@@ -211,12 +210,12 @@ export default function PageNav({ children }) {
                       <DashboardIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary={"DashBoard"}
+                      primary={"Cycles"}
                       sx={{ opacity: open ? 1 : 0 }}
                     />
                   </ListItemButton>
-              </ListItem>
-                </Link>
+                </ListItem>
+              </Link>
 
               <ListItem
                 key={"Closed_Groups"}

@@ -21,7 +21,7 @@ import Cookies from "js-cookie";
 import { isAlphaNumeric } from "@/utils";
 
 export default function AddressForm(props) {
-  const { handleNext,setAddUserOpen } = props;
+  const { handleNext, setAddUserOpen } = props;
   const [personLimit, setpersonLimit] = React.useState(0);
   const handlePersonLimitChange = (e) => {
     setpersonLimit(parseInt(e.target.value));
@@ -37,7 +37,7 @@ export default function AddressForm(props) {
 
   const [name, setName] = React.useState("");
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setName(e.target.value.trim());
   };
   const [err, setErr] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -94,12 +94,10 @@ export default function AddressForm(props) {
     } else if (!isAlphaNumeric(name)) {
       setErr(`Name can only contain English Alphabets`);
       setOpen(true);
-    }
-     else if (personLimit == 0) {
+    } else if (personLimit == 0) {
       setErr(`Group size cannot be 0`);
       setOpen(true);
-    } 
-    else if (savingGoal == 0) {
+    } else if (savingGoal == 0) {
       setErr(`Contribution Amount cannot be 0`);
       setOpen(true);
     } else if (payoutDuration == 0) {
@@ -117,7 +115,13 @@ export default function AddressForm(props) {
         handleNext();
       } catch (error) {
         console.error("Error fetching closed groups:", error);
-        setErr(error.message + " "+ (  error?.response?.data?.message ?error?.response?.data?.message:"" ));
+        setErr(
+          error.message +
+            " " +
+            (error?.response?.data?.message
+              ? error?.response?.data?.message
+              : "")
+        );
         setOpen(true);
       } finally {
       }
@@ -216,7 +220,9 @@ export default function AddressForm(props) {
       </Grid>
       <Button
         variant="contained"
-        onClick={()=>{setAddUserOpen(false)}}
+        onClick={() => {
+          setAddUserOpen(false);
+        }}
         sx={{ mt: 3, ml: 1 }}
       >
         Cancel

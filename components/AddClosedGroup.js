@@ -21,7 +21,7 @@ import Cookies from "js-cookie";
 import { isAlphaNumeric } from "@/utils";
 
 export default function AddressForm(props) {
-  const { handleNext, setAddUserOpen } = props;
+  const { handleNext, setAddUserOpen, refresh } = props;
   const [personLimit, setpersonLimit] = React.useState(0);
   const handlePersonLimitChange = (e) => {
     setpersonLimit(parseInt(e.target.value));
@@ -37,8 +37,14 @@ export default function AddressForm(props) {
 
   const [name, setName] = React.useState("");
   const handleNameChange = (e) => {
-    setName(e.target.value.trim());
+    setName(e.target.value);
   };
+
+  const [type, setType] = React.useState("public");
+  const handleTypeChange = (e) => {
+    setType(e.target.value);
+  };
+
   const [err, setErr] = React.useState(0);
   const [open, setOpen] = React.useState(false);
 
@@ -65,6 +71,7 @@ export default function AddressForm(props) {
   const [payoutDurations, setPayoutDurations] = React.useState([0]);
   const [personLimits, setPersonLimits] = React.useState([0]);
   const [savingGoals, setSavingGoals] = React.useState([0]);
+
   async function getAllOptions() {
     const token = Cookies.get("token");
     api.defaults.headers.Authorization = `Bearer ${token}`;
@@ -88,8 +95,9 @@ export default function AddressForm(props) {
   }
 
   const handleFormSubmit = async () => {
-    if (name == "") {
+    if (name.trim() == "") {
       setErr(`Name cannot be Blank`);
+      setName("");
       setOpen(true);
     } else if (!isAlphaNumeric(name)) {
       setErr(`Name can only contain English Alphabets`);
@@ -109,10 +117,12 @@ export default function AddressForm(props) {
         personLimit: personLimit,
         roundDuration: payoutDuration,
         savingGoal: savingGoal,
+        type: type,
       });
       try {
         await api.post("/closed-group", data);
         handleNext();
+        refresh();
       } catch (error) {
         console.error("Error fetching closed groups:", error);
         setErr(
@@ -215,6 +225,29 @@ export default function AddressForm(props) {
                 {val === 0 ? "Select Payout Duration..." : val + " Days"}
               </MenuItem>
             ))}
+          </Select>
+        </Grid>
+        <Grid item xs={8} sm={8}>
+          <InputLabel variant="standard" htmlFor="select-person-limit">
+            <Typography variant="h6" mb={0}>
+              Type
+            </Typography>
+          </InputLabel>
+          <Select
+            id="select-payout-durations"
+            value={type}
+            fullWidth={true}
+            label="Saving Goal"
+            onChange={handleTypeChange}
+          >
+            {/* {payoutDurations.map((val) => ( */}
+            <MenuItem key={"public"} value={"public"}>
+              {"Public"}
+            </MenuItem>
+            <MenuItem key={"private"} value={"private"}>
+              {"Private"}
+            </MenuItem>
+            {/* ))} */}
           </Select>
         </Grid>
       </Grid>

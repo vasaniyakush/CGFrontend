@@ -84,10 +84,12 @@ export default function GroupDetails(props) {
         </Grid>
         <Grid item xs={2.5} md={2.5}>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Code <IconButton color="primary"
+            Invite Code
+            <IconButton
+              color="primary"
               onClick={(e) => {
                 //   console.log(e.target.innerHTML);
-                
+
                 navigator.clipboard.writeText(details.code);
               }}
               size="small"
@@ -104,7 +106,6 @@ export default function GroupDetails(props) {
             component="p"
             variant="h5"
           >
-            
             {details.code}
           </Typography>
         </Grid>

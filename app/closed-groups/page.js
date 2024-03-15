@@ -45,7 +45,7 @@ export default function Home() {
       },
     },
     { field: "id", headerName: "ID" },
-    { field: "name", headerName: "Name", width:200 },
+    { field: "name", headerName: "Name", width: 200 },
     { field: "personLimit", headerName: "Person Limit", type: "number" },
     { field: "savingGoal", headerName: "Cycle Amount", type: "number" },
     {
@@ -82,7 +82,7 @@ export default function Home() {
     },
     {
       field: "code",
-      headerName: "Group Code",
+      headerName: "Invite Code",
       // description: "This column has a value getter and is not sortable.",
       width: 120,
     },
@@ -105,10 +105,8 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    getClosedGroups();
     setLoading(true);
-      setLoading(false);
- 
+    getClosedGroups();
   }, [refresh]);
 
   async function getClosedGroups() {
@@ -119,6 +117,7 @@ export default function Home() {
       const response = await api.get("admin/closed-groups");
       console.log(response.data);
       setGroups(response.data.groups);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching closed groups:", error);
     } finally {
@@ -132,7 +131,7 @@ export default function Home() {
 
   return (
     <>
-      <Container disableGutters sx={{ width: "100%" }} maxWidth="false" fixed>
+      <Container disableGutters maxWidth="fixed">
         <Box disableGutters sx={{ height: "80vh" }}>
           <ThemeProvider theme={theme}>
             <DataGrid
@@ -154,7 +153,9 @@ export default function Home() {
                 },
               }}
             />
-            <Button variant="outlined" onClick={toggleRefresh}>Refresh</Button>
+            <Button variant="outlined" onClick={toggleRefresh}>
+              Refresh
+            </Button>
           </ThemeProvider>
           <Fab
             onClick={handleAddUserOpen}
@@ -165,12 +166,12 @@ export default function Home() {
               // ml:"30%",
               // mr:"30%"
               right: 140,
-              bottom: 16
+              bottom: 16,
             }}
             variant="extended"
             aria-label="add"
           >
-            <AddIcon sx={{ mr: "auto",ml:"auto" }} />
+            <AddIcon sx={{ mr: "auto", ml: "auto" }} />
             Create Group
           </Fab>
         </Box>
@@ -182,7 +183,10 @@ export default function Home() {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <AddClosedGroupModal setAddUserOpen={setAddUserOpen} refresh={toggleRefresh}/>
+          <AddClosedGroupModal
+            setAddUserOpen={setAddUserOpen}
+            refresh={toggleRefresh}
+          />
         </Box>
       </Modal>
     </>

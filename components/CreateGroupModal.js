@@ -50,6 +50,7 @@ export default function AddClosedGroupModal(props) {
       case 0:
         return (
           <AddClosedGroup
+            refresh={refresh}
             handleNext={handleNext}
             setAddUserOpen={setAddUserOpen}
           />
@@ -90,7 +91,7 @@ export default function AddClosedGroupModal(props) {
               <Button
                 variant="contained"
                 onClick={() => {
-                  refresh(), setAddUserOpen(false);
+                  setAddUserOpen(false);
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >
@@ -120,7 +121,7 @@ export default function AddClosedGroupModal(props) {
             </React.Fragment>
           )}
         </Paper>
-        <Copyright />
+        {/* <Copyright /> */}
       </Container>
     </React.Fragment>
   );

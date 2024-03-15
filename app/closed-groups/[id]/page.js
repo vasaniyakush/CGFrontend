@@ -85,7 +85,6 @@ export default function Dashboard({ params }) {
 
   return (
     <Box sx={{ display: "flex", ml: 0 }}>
-
       <Box
         component="main"
         sx={{
@@ -162,31 +161,27 @@ export default function Dashboard({ params }) {
                       height: 240,
                     }}
                   >
-              
-                    
                     <InvitesList name={"invite"} invites={invites} />
                   </Paper>
                 )}
               </Grid>
             )}
-     
+
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            
                 <Typography
-                      component="h2"
-                      variant="h6"
-                      color="primary"
-                      gutterBottom
-                    >
-                      Members
-                    </Typography>
+                  component="h2"
+                  variant="h6"
+                  color="primary"
+                  gutterBottom
+                >
+                  Members
+                </Typography>
                 <MemberTable groupId={params.id} />
               </Paper>
             </Grid>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-               
                 <CyclesTable />
               </Paper>
             </Grid>

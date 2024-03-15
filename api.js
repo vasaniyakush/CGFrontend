@@ -7,7 +7,7 @@ import Axios from "axios";
 // }
 let urls = {
   test: `http://localhost:3000`,
-  development: "https://closedgroupapi.onrender.com/api/v1/",
+  development: "http://localhost:3000/api/v1/",
   production: "https://closedgroupapi.onrender.com/api/v1/",
 };
 const api = Axios.create({

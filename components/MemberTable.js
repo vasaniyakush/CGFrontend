@@ -22,19 +22,19 @@ import Link from "next/link";
 import AddClosedGroupModal from "@/components/CreateGroupModal";
 // AddClosedGroupModal
 function formatDateTime(datetime) {
-    const date = new Date(datetime);
-    const day = ("0" + date.getDate()).slice(-2);
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const year = date.getFullYear();
+  const date = new Date(datetime);
+  const day = ("0" + date.getDate()).slice(-2);
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const year = date.getFullYear();
 
-    let hours = date.getHours();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // Handle midnight
-    const minutes = ("0" + date.getMinutes()).slice(-2);
+  let hours = date.getHours();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // Handle midnight
+  const minutes = ("0" + date.getMinutes()).slice(-2);
 
-    const formattedDateTime = `${day}/${month}/${year} - ${hours}:${minutes} ${ampm}`;
-    return formattedDateTime;
+  const formattedDateTime = `${day}/${month}/${year} - ${hours}:${minutes} ${ampm}`;
+  return formattedDateTime;
 }
 
 export default function MemberTable(props) {
@@ -75,24 +75,33 @@ export default function MemberTable(props) {
       field: "phone",
       headerName: "Mobile Number",
       width: 200,
-    valueGetter: (params) => `${params.row.FrontUser.MobileNumber}`,
-},
-{
-    field: "joined",
-    headerName: "Joined on",
+      valueGetter: (params) => `${params.row.FrontUser.MobileNumber}`,
+    },
+    {
+      field: "joined",
+      headerName: "Joined on",
       width: 200,
       //   type:"dateTime",
       // description: "This column has a value getter and is not sortable.",
       valueGetter: (params) => formatDateTime(params.row.createdAt),
     },
     {
-        field: "active",
-        width: 200,
+      field: "active",
+      width: 200,
       headerName: "Active Status",
       // description: "This column has a value getter and is not sortable.",
-      valueGetter: (params) => (params.row.active ? "Active" : "Inactive"),
+      valueGetter: (params) => (params.row.isActive ? "Active" : "Inactive"),
     },
-    
+    {
+      field: "checkr",
+      width: 200,
+      headerName: "Checkr Verification Status",
+      // description: "This column has a value getter and is not sortable.",
+      valueGetter: (params) =>
+        params.row.FrontUser.chverification.status == "idle"
+          ? "Invite Not Sent"
+          : params.row.FrontUser.chverification.status,
+    },
   ];
 
   useEffect(() => {

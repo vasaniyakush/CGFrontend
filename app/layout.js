@@ -25,7 +25,7 @@ const materialTheme = createTheme({
     secondary: {
       main: "#fce4ec",
       dark: "#e57373",
-      contrastText: '#000000',
+      contrastText: "#000000",
     },
     divider: "rgba(0,0,0,0.24)",
     background: {
@@ -35,7 +35,6 @@ const materialTheme = createTheme({
 });
 
 export default function RootLayout({ children }) {
-   
   return (
     <html lang="en">
       <head>
@@ -53,8 +52,7 @@ export default function RootLayout({ children }) {
 
               {children}
               {/* </ProtectRoute> */}
-              
-              </PageNav>
+            </PageNav>
           </AuthProvider>
         </ThemeProvider>
       </body>

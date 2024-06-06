@@ -1,6 +1,7 @@
 import {
   Alert,
   Avatar,
+  Backdrop,
   Box,
   Button,
   Card,
@@ -98,8 +99,11 @@ export default function LoginForm() {
         >
           {!loading ? (
             <>
-              <Avatar  variant="circular" sx={{ bgcolor:"white",alignSelf: "center" }}>
-                <LockIcon color="primary"/>
+              <Avatar
+                variant="circular"
+                sx={{ bgcolor: "white", alignSelf: "center" }}
+              >
+                <LockIcon color="primary" />
               </Avatar>
               <Typography
                 alignSelf="center"
@@ -158,24 +162,31 @@ export default function LoginForm() {
                   variant="filled"
                   sx={{ width: "100%" }}
                 >
-                 Invalid Credentials
+                  Invalid Credentials
                 </Alert>
               </Snackbar>
             </>
           ) : (
-            <>
-              <Typography
-                alignSelf="center"
-                mb="1rem"
-                component="h1"
-                variant="h4"
-              >
-                Please Wait...
-              </Typography>
-              <Skeleton variant="rectangular" width={420} height={400}>
-                <CircularProgress />
-              </Skeleton>
-            </>
+            // <>
+            //   <Typography
+            //     alignSelf="center"
+            //     mb="1rem"
+            //     component="h1"
+            //     variant="h4"
+            //   >
+            //     Please Wait...
+            //   </Typography>
+            //   <Skeleton variant="rectangular" width={420} height={400}>
+            //     <CircularProgress />
+            //   </Skeleton>
+            // </>
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={true}
+              // onClick={handleClose}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           )}
         </Paper>
       </Box>

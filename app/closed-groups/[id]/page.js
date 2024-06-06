@@ -54,7 +54,12 @@ export default function Dashboard({ params }) {
         setDetails(response.data.closedGroup);
         setOwnGroup(response.data.closedGroup.createdBy == user.data.uid);
         setDetailsLoading(false);
-        // console.log(response.data.closedGroup.createdBy,user.data.uid, user,response.data.closedGroup.createdBy == user.data.uid)
+        console.log(
+          response.data.closedGroup.createdBy,
+          user.data.uid,
+          user,
+          response.data.closedGroup.createdBy == user.data.uid
+        );
         const response2 = await api.get(
           `closed-group/invite?closedgroupid=${params.id}`
         );
@@ -93,7 +98,7 @@ export default function Dashboard({ params }) {
           ml: 0,
         }}
       >
-        <Container maxWidth="false" sx={{ mt: 1, mb: 1, ml: 0 }}>
+        <Container maxWidth="xl" sx={{ mt: 1, mb: 1, ml: 0 }}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={12} lg={12}>
               {detailsLoading ? (
@@ -182,8 +187,19 @@ export default function Dashboard({ params }) {
             </Grid>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <CyclesTable />
+                <Typography
+                  component="h2"
+                  variant="h6"
+                  color="primary"
+                  gutterBottom
+                >
+                  Cycles
+                </Typography>
+                <CyclesTable groupId={params.id} />
+                {/* <MemberTable groupId={params.id} /> */}
               </Paper>
+              {/* <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}> */}
+              {/* </Paper> */}
             </Grid>
           </Grid>
           {/* <Copyright sx={{ pt: 4 }} /> */}

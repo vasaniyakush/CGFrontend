@@ -188,8 +188,8 @@ export default function PageNav({ children }) {
             <List>
               <Link href="/">
                 <ListItem
-                  key={"Cycles"}
-                  onClick={() => setOpenTab("Cycles".toLowerCase())}
+                  key={"Dashboard"}
+                  onClick={() => setOpenTab("Dashboard".toLowerCase())}
                   disablePadding
                   sx={{ display: "block" }}
                 >
@@ -210,7 +210,7 @@ export default function PageNav({ children }) {
                       <DashboardIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary={"Cycles"}
+                      primary={"Dashoard"}
                       sx={{ opacity: open ? 1 : 0 }}
                     />
                   </ListItemButton>
